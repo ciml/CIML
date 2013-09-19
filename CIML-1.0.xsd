@@ -1,0 +1,1309 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema version="1.0"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.compositeindicators.net/CIML-1_0"
+	targetNamespace="http://www.compositeindicators.net/CIML-1_0"
+	elementFormDefault="qualified">
+
+	<xsd:annotation>
+		<xsd:documentation>
+			@(#)CIML-1.0.xsd 1.0  Apr 14 2013
+		</xsd:documentation>
+	</xsd:annotation>
+
+	<xsd:annotation>
+		<xsd:documentation>
+
+			DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
+
+			Copyright 2011-2013 www.compositeindicators.net - All rights reserved.
+
+			Everyone is permitted to copy and distribute verbatim copies of this
+			document, but changing it is not allowed.
+
+			GNU General Public License version 3.
+
+		</xsd:documentation>
+	</xsd:annotation>
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- quering server for the information on capabilities ++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- querying for the web service capabilities -->
+<xsd:element name="QueryCIML">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="QueryData"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				ref="QueryModel"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				ref="QueryResults"
+				minOccurs="0"
+				maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- querying for capabilities of the data processing -->
+<xsd:element name="QueryData">
+	<xsd:complexType>
+		<xsd:attribute
+			name="QueryIndiceScales"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="QueryMissingItemsEnabled"
+			type="xsd:boolean"
+			default="false"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- querying for capabilities of the model -->
+<xsd:element name="QueryModel">
+	<xsd:complexType>
+		<xsd:attribute
+			name="QueryDataStatisticsOperator"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="QueryOutliersDetectionOperator"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="QueryDataImputationOperator"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="QueryMultivariateAnalysisOperator"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="QueryDataNormalizationOperator"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="QueryWeightingAggregationOperator"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="QueryUncertaintySensitivityOperator"
+			type="xsd:boolean"
+			default="false"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- querying for capabilities of the data processing -->
+<xsd:element name="QueryResults">
+	<xsd:complexType>
+		<xsd:attribute
+			name="QueryDefaultResultPrecision"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="QueryMaxResultPrecision"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="QueryDefaultLoggingLevel"
+			type="xsd:boolean"
+			default="false"/>
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- web service response about its capabilities +++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- reporting the web service capabilities -->
+<xsd:element name="ReplyCIML">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="ReplyData"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				ref="ReplyModel"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				ref="ReplyResults"
+				minOccurs="0"
+				maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- reporting the capabilities of the data processing -->
+<xsd:element name="ReplyData">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="ReplyIndiceScales"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				name="ReplyMissingItemsEnabled"
+				type="xsd:boolean"
+				minOccurs="0"
+				maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- reporting the capabilities of processing divers scales of indices -->
+<xsd:element name="ReplyIndiceScales">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				name="ReplyIndiceScale"
+				type="INDICE-SCALE-TYPE"
+				minOccurs="1"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- reporting the capabilities of the model -->
+<xsd:element name="ReplyModel">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				name="ReplyDataStatisticsOperator"
+				type="DATA-STATISTICS-ALGORITHM"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				name="ReplyOutliersDetectionOperator"
+				type="OUTLIERS-DETECTION-ALGORITHM"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				name="ReplyDataImputationOperator"
+				type="DATA-IMPUTATION-ALGORITHM"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				name="ReplyMultivariateAnalysisOperator"
+				type="MULTIVARIATE-ANALYSIS-ALGORITHM"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				name="ReplyDataNormalizationOperator"
+				type="DATA-NORMALIZATION-ALGORITHM"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				name="ReplyWeightingAggregationOperator"
+				type="WEIGHTING-AGGREGATION-ALGORITHM"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				name="ReplyUncertaintySensitivityOperator"
+				type="UNCERTAINTY-SENSITIVITY-ALGORITHM"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- reporting the capabilities of the data processing -->
+<xsd:element name="ReplyResults">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				name="ReplyDefaultResultPrecision"
+				type="xsd:integer"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				name="ReplyMaxResultPrecision"
+				type="xsd:integer"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				name="ReplyDefaultLoggingLevel"
+				type="LOGGING-LEVEL-TYPE"
+				minOccurs="0"
+				maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- all INPUTS: directives, data, model +++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- all the input data comes to the server inside this element -->
+<xsd:element name="InputsCIML">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="ExecutionDirectives"/>
+			<xsd:element
+				ref="DataDictionary"/>
+			<xsd:element
+				ref="ComputationModel"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+
+
+<!-- directives describe the overall way the data should be processed -->
+<xsd:element name="ExecutionDirectives">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				name="TimeArchetype"
+				type="TIME-ARCHETYPE-TYPE"/>
+			<xsd:element
+				name="LoggingLevel"
+				type="LOGGING-LEVEL-TYPE"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				name="ResultPrecision"
+				type="PRECISION-TYPE"
+				minOccurs="0"
+				maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- defines the granularity of time series in the data -->
+<xsd:simpleType name="TIME-ARCHETYPE-TYPE">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="year"/>
+		<xsd:enumeration value="yearMonth"/>
+		<xsd:enumeration value="month"/>
+		<xsd:enumeration value="yearMonthDay"/>
+		<xsd:enumeration value="monthDay"/>
+		<xsd:enumeration value="day"/>
+		<xsd:enumeration value="yearDay"/>
+		<xsd:enumeration value="yearWeek"/>
+		<xsd:enumeration value="week"/>
+		<xsd:enumeration value="yearWeekDay"/>
+		<xsd:enumeration value="weekDay"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- defines the required precision of the results -->
+<xsd:simpleType name="PRECISION-TYPE">
+	<xsd:restriction base="xsd:integer">
+		<xsd:minInclusive value="0"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- data dictionary - data definitions and values +++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- all the "data" available for the computation process -->
+<xsd:element name="DataDictionary">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="Entities"/>
+			<xsd:element
+				ref="Indices"/>
+			<xsd:element
+				ref="Values"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- declaration od entities +++++++++++++++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- list of entities (e.g. countries, branches, persons etc.) -->
+<xsd:element name="Entities">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="Entity"
+				minOccurs="1"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- each entity must have at least an ID, possibly name and description -->
+<xsd:element name="Entity">
+	<xsd:complexType>
+		<xsd:attribute
+			name="EntityID"
+			type="ENTITY-ID"
+			use="required"/>
+		<xsd:attribute
+			name="EntityName"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="EntityDescription"
+			type="xsd:string"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- restrictions on entity ID -->
+<xsd:simpleType name="ENTITY-ID">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:pattern value="[_a-zA-Z][_a-zA-Z0-9]*"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- declaration od indices ++++++++++++++++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- list of indices (actually thier declarations) -->
+<xsd:element name="Indices">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="Indice"
+				minOccurs="1"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- each indice must have at least an ID, possibly name, description, unit and ordering -->
+<xsd:element name="Indice">
+	<xsd:complexType>
+		<xsd:attribute
+			name="IndiceID"
+			type="INDICE-ID"
+			use="required"/>
+		<xsd:attribute
+			name="IndiceName"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="IndiceDescription"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="IndiceOrdering"
+			type="INDICE-ORDERING-TYPE"
+			default="Ascending"/>
+		<xsd:attribute
+			name="IndiceScale"
+			type="INDICE-SCALE-TYPE"
+			default="Absolute"/>
+		<xsd:attribute
+			name="IndiceMinimum"
+			type="VALUE-TYPE"
+			use="optional"/>
+		<xsd:attribute
+			name="IndiceMaximum"
+			type="VALUE-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- restrictions on indice ID -->
+<xsd:simpleType name="INDICE-ID">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:pattern value="[_a-zA-Z][_a-zA-Z0-9]*"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- to be able to determine if the greater value is better or the inverse -->
+<xsd:simpleType name="INDICE-ORDERING-TYPE">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="Ascending"/>
+		<xsd:enumeration value="Descending"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- to be able to determine the type of data -->
+<xsd:simpleType name="INDICE-SCALE-TYPE">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="Ordinal"/>
+		<xsd:enumeration value="Interval"/>
+		<xsd:enumeration value="Ratio"/>
+		<xsd:enumeration value="Absolute"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- actual data values ++++++++++++++++++++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- the complex structure of data values -->
+<xsd:element name="Values">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="TimeData"
+				minOccurs="1"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- first: sequenced by time -->
+<xsd:element name="TimeData">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="EntityData"
+				minOccurs="1"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="TimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="required"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- defines the granularity of time series in the data -->
+<xsd:simpleType name="TIMESTAMP-TYPE">
+	<xsd:restriction base="xsd:string">
+		<!-- YYYY -->
+		<xsd:pattern value="[0-9]{4}"/>
+		<!-- YYYY-MM -->
+		<xsd:pattern value="[0-9]{4}-((0[1-9])|(1[0-2]))"/>
+		<!-- MM -->
+		<xsd:pattern value="((0[1-9])|(1[0-2]))"/>
+		<!-- YYYY-MM-DD -->
+		<xsd:pattern value="[0-9]{4}-((0[1-9])|(1[0-2]))-((0[1-9])|([12][0-9])|(3[0-1]))"/>
+		<!-- MM-DD -->
+		<xsd:pattern value="((0[1-9])|(1[0-2]))-((0[1-9])|([12][0-9])|(3[0-1]))"/>
+		<!-- DDD -->
+		<xsd:pattern value="((00[1-9])|(0[1-9][0-9])|([1-2][0-9][0-9])|(3[0-5][0-9])|(36[0-6]))"/>
+		<!-- YYYY-DDD -->
+		<xsd:pattern value="[0-9]{4}-((00[1-9])|(0[1-9][0-9])|([1-2][0-9][0-9])|(3[0-5][0-9])|(36[0-6]))"/>
+		<!-- YYYY.WW -->
+		<xsd:pattern value="[0-9]{4}.((0[1-9])|([1-4][0-9])|(5[0-4]))"/>
+		<!-- WW -->
+		<xsd:pattern value="((0[1-9])|([1-4][0-9])|(5[0-4]))"/>
+		<!-- YYYY.WW.D -->
+		<xsd:pattern value="[0-9]{4}-((0[1-9])|([1-4][0-9])|(5[0-4])).[1-7]"/>
+		<!-- WW.D -->
+		<xsd:pattern value="((0[1-9])|([1-4][0-9])|(5[0-4])).[1-7]"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- second: sequenced by entity -->
+<xsd:element name="EntityData">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="IndiceData"
+				minOccurs="1"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="EntityID"
+			type="ENTITY-ID"
+			use="required"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- third: sequenced by indice -->
+<xsd:element name="IndiceData">
+	<xsd:complexType>
+		<xsd:choice>
+			<xsd:element
+				name="Value"
+				type="VALUE-TYPE"/>
+			<xsd:element
+				ref="Missing"/>
+		</xsd:choice>
+		<xsd:attribute
+			name="IndiceID"
+			type="INDICE-ID"
+			use="required"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- real-value restriction definition -->
+<xsd:simpleType name="VALUE-TYPE">
+	<xsd:restriction base="xsd:string">
+		<xsd:pattern value="[-+]?(([0-9]*[,\.]?[0-9]+)|([0-9]+[,\.]?[0-9]*))([eE][-+]?[0-9]+)?"/>
+		<xsd:pattern value=""/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!-- missing-value restriction definition with time-series items for eventual regression -->
+<xsd:element name="Missing">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="Item"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="MissingTimeArchetype"
+			type="TIME-ARCHETYPE-TYPE"
+			use="optional"/>
+		<xsd:attribute
+			name="MissingTimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<xsd:element name="Item">
+	<xsd:complexType>
+		<xsd:attribute
+			name="ItemTimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="required"/>
+		<xsd:attribute
+			name="ItemValue"
+			type="VALUE-TYPE"
+			use="required"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- computational model structure +++++++++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- computation model (sequence of operators applied to the data) -->
+<xsd:element name="ComputationModel">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="DataStatisticsOperator"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				ref="OutliersDetectionOperator"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				ref="DataImputationOperator"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				ref="MultivariateAnalysisOperator"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				ref="DataNormalizationOperator"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				ref="WeightingAggregationOperator"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				ref="UncertaintySensitivityOperator"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="CompositeIndicator"
+			type="VARIABLE-ID"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- restrictions on variable ID -->
+<xsd:simpleType name="VARIABLE-ID">
+	<xsd:restriction base="xsd:string">
+		<xsd:minLength value="1"/>
+		<xsd:pattern value="[_a-zA-Z][_a-zA-Z0-9]*"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- elements selected for operator execution -->
+<xsd:simpleType name="ELEMENT-TYPE">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="entities"/>
+		<xsd:enumeration value="indices"/>
+		<xsd:enumeration value="timestamps"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- declarations concerning DATA STATISTICS +++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- declaration of the data statistics operators -->
+<xsd:element name="DataStatisticsOperator">
+	<xsd:complexType>
+		<xsd:attribute
+			name="DataStatisticsAlgorithm"
+			type="DATA-STATISTICS-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="Rows"
+			type="ELEMENT-TYPE"
+			use="optional"/>
+		<xsd:attribute
+			name="Cols"
+			type="ELEMENT-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- algorithms used with data statistics operators -->
+<xsd:simpleType name="DATA-STATISTICS-ALGORITHM">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="BasicStatistics"/>
+		<xsd:enumeration value="MissingValuesRatio"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- declarations concerning OUTLIERS ++++++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- declaration of the outlier operators -->
+<xsd:element name="OutliersDetectionOperator">
+	<xsd:complexType>
+		<xsd:attribute
+			name="OutliersDetectionAlgorithm"
+			type="OUTLIERS-DETECTION-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="IndiceID"
+			type="INDICE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="TimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- algorithms used with outliers operators -->
+<xsd:simpleType name="OUTLIERS-DETECTION-ALGORITHM">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="MinMaxOutliers"/>
+		<xsd:enumeration value="ANOVA"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- declarations concerning DATA IMPUTATION +++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- declaration of the data imputation operators -->
+<xsd:element name="DataImputationOperator">
+	<xsd:complexType>
+		<xsd:attribute
+			name="DataImputationAlgorithm"
+			type="DATA-IMPUTATION-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="ValueToBeImputated"
+			type="VALUE-TYPE"
+			use="optional"/>
+		<xsd:attribute
+			name="EntityID"
+			type="ENTITY-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="IndiceID"
+			type="INDICE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="TimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- algorithms used with data imputation operators -->
+<xsd:simpleType name="DATA-IMPUTATION-ALGORITHM">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="ForcedValue"/>
+		<xsd:enumeration value="MeanImputation"/>
+		<xsd:enumeration value="MedianImputation"/>
+		<xsd:enumeration value="ModeImputation"/>
+		<xsd:enumeration value="LatestValue"/>
+		<xsd:enumeration value="LinearRegression"/>
+		<xsd:enumeration value="PolynomialRegression"/>
+		<xsd:enumeration value="LogisticRegression"/>
+		<xsd:enumeration value="ResidualMeanSquare"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- declarations concerning MULTIVARIATE ANALYSIS +++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- declaration of the multivariate analysis operators -->
+<xsd:element name="MultivariateAnalysisOperator">
+	<xsd:complexType>
+		<xsd:attribute
+			name="MultivariateAnalysisAlgorithm"
+			type="MULTIVARIATE-ANALYSIS-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="Arguments"
+			type="ELEMENT-TYPE"
+			use="required"/>
+		<xsd:attribute
+			name="TimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- algorithms used with multivariate analysis operators -->
+<xsd:simpleType name="MULTIVARIATE-ANALYSIS-ALGORITHM">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="PearsonCorrelationAnalysis"/>
+		<xsd:enumeration value="SpearmanCorrelationAnalysis"/>
+		<xsd:enumeration value="PrincipalComponentAnalysis"/>
+		<xsd:enumeration value="CronbachCoefficientAlpha"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- declarations concerning NORMALIZATION +++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- declaration of the normalization operators -->
+<xsd:element name="DataNormalizationOperator">
+	<xsd:complexType>
+		<xsd:attribute
+			name="DataNormalizationAlgorithm"
+			type="DATA-NORMALIZATION-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="IndiceID"
+			type="INDICE-ID"
+			use="required"/>
+		<xsd:attribute
+			name="Inverse"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="FromZero"
+			type="xsd:boolean"
+			default="false"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- algorithms used with normalization operators -->
+<xsd:simpleType name="DATA-NORMALIZATION-ALGORITHM">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="ZScoresNormalization"/>
+		<xsd:enumeration value="MinMaxNormalization"/>
+		<xsd:enumeration value="ScorePointRanking"/>
+		<xsd:enumeration value="ScoreNormalizedRanking"/>
+		<xsd:enumeration value="NormalizedExponentialRanking"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- declarations concerning WEIGHTING & AGGREGATION +++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- declaration of the weighting & aggregation operators -->
+<xsd:element name="WeightingAggregationOperator">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="AggregationComponent"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="WeightingAggregationAlgorithm"
+			type="WEIGHTING-AGGREGATION-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="VariableID"
+			type="VARIABLE-ID"
+			use="required"/>
+		<xsd:attribute
+			name="NormalizeWeights"
+			type="xsd:boolean"
+			default="false"/>
+		<xsd:attribute
+			name="Orness"
+			type="VALUE-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- algorithms used with weighting & aggregation operators -->
+<xsd:simpleType name="WEIGHTING-AGGREGATION-ALGORITHM">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="SimpleAdditiveAggregation"/> 
+		<xsd:enumeration value="WeightedAdditiveAggregation"/>
+		<xsd:enumeration value="GeometricAggregation"/>
+		<xsd:enumeration value="OrderedWeightedAveraging"/>
+		<xsd:enumeration value="MultiCriteriaApproach"/>
+		<xsd:enumeration value="DataEnvelopmentAnalysis"/>
+		<xsd:enumeration value="AnalyticHierarchyProcess"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- optional 'weight' for one indice -->
+<xsd:element name="AggregationComponent">
+	<xsd:complexType>
+		<xsd:attribute
+			name="IndiceID"
+			type="INDICE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="VariableID"
+			type="VARIABLE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="Weight"
+			type="VALUE-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- declarations concerning UNCERTAINTY & SENSITIVITY +++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- declaration of the weighting & aggregation operators -->
+<xsd:element name="UncertaintySensitivityOperator">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="UncertaintySensitivityComponent"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="UncertaintySensitivityAlgorithm"
+			type="UNCERTAINTY-SENSITIVITY-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="TimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- algorithms used with uncertainty & sensitivity operators -->
+<xsd:simpleType name="UNCERTAINTY-SENSITIVITY-ALGORITHM">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="KendallTauDistance"/>
+		<xsd:enumeration value="SpearmanFootruleDistance"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- optional 'weight' for one indice -->
+<xsd:element name="UncertaintySensitivityComponent">
+	<xsd:complexType>
+		<xsd:attribute
+			name="IndiceID"
+			type="INDICE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="VariableID"
+			type="VARIABLE-ID"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- all OUTPUTS: statistics, results, logging notes +++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- all the output results comes from the server inside this element -->
+<xsd:element name="OutputsCIML">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="OutcomeAnalyzis"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				ref="ResultsData"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				ref="LoggingNotes"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- results of analyzis thruout the calculations ++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- main element of the analyzis -->
+<xsd:element name="OutcomeAnalyzis">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="OutcomeDataStatistics"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				ref="OutcomeMultivariateAnalysis"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				ref="OutcomeUncertaintySensitivity"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- outcome from Data Statistics -->
+<xsd:element name="OutcomeDataStatistics">
+	<xsd:complexType>
+		<xsd:choice>
+			<xsd:element
+				ref="DataStatisticsElement"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+			<xsd:element
+				ref="BasicStatisticsElement"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:choice>
+		<xsd:attribute
+			name="DataStatisticsAlgorithm"
+			type="DATA-STATISTICS-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="Rows"
+			type="ELEMENT-TYPE"
+			use="optional"/>
+		<xsd:attribute
+			name="Cols"
+			type="ELEMENT-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<xsd:element name="DataStatisticsElement">
+	<xsd:complexType>
+		<xsd:attribute
+			name="Row"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Col"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Value"
+			type="xsd:string"
+			use="required"/>
+	</xsd:complexType>
+</xsd:element>
+
+<xsd:element name="BasicStatisticsElement">
+	<xsd:complexType>
+		<xsd:attribute
+			name="IndiceID"
+			type="INDICE-ID"
+			use="required"/>
+		<xsd:attribute
+			name="Minimum"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Maximum"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Median"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="SecondMoment"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="StandardDeviation"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Mean"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Variance"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Skewness"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Kurtosis"
+			type="xsd:string"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+
+
+<!-- outcome from Multivariate Analysis -->
+<xsd:element name="OutcomeMultivariateAnalysis">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="MultivariateAnalysisElement"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="MultivariateAnalysisAlgorithm"
+			type="MULTIVARIATE-ANALYSIS-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="Arguments"
+			type="ELEMENT-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<xsd:element name="MultivariateAnalysisElement">
+	<xsd:complexType>
+		<xsd:attribute
+			name="Row"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Col"
+			type="xsd:string"
+			use="optional"/>
+		<xsd:attribute
+			name="Value"
+			type="xsd:string"
+			use="required"/>
+	</xsd:complexType>
+</xsd:element>
+
+
+
+<!-- outcome from Uncertainty Sensitivity analyzis -->
+<xsd:element name="OutcomeUncertaintySensitivity">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="UncertaintySensitivityElement"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="UncertaintySensitivityAlgorithm"
+			type="UNCERTAINTY-SENSITIVITY-ALGORITHM"
+			use="required"/>
+		<xsd:attribute
+			name="TimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<xsd:element name="UncertaintySensitivityElement">
+	<xsd:complexType>
+		<xsd:attribute
+			name="RowIndice"
+			type="INDICE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="RowVariable"
+			type="VARIABLE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="ColIndice"
+			type="INDICE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="ColVariable"
+			type="VARIABLE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="Value"
+			type="xsd:string"
+			use="required"/>
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- OUTPUTS in details ++++++++++++++++++++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- main element of the result values -->
+<xsd:element name="ResultsData">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="TimeResults"
+				minOccurs="1"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- each timestamp has the set of Indices calculated for each Entity -->
+<xsd:element name="TimeResults">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="EntityIndice"
+				minOccurs="1"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="TimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="required"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- actual value of the Indice for a given Entity -->
+<xsd:element name="EntityIndice">
+	<xsd:complexType>
+		<xsd:attribute
+			name="EntityID"
+			type="ENTITY-ID"
+			use="required"/>
+		<xsd:attribute
+			name="IndiceValue"
+			type="VALUE-TYPE"
+			use="required"/>
+	</xsd:complexType>
+</xsd:element>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+<!-- LOGGING NOTES specific data +++++++++++++++++++++++++++++ -->
+<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+
+<!-- list of logging notes  -->
+<xsd:element name="LoggingNotes">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				ref="LoggingStatistics"/>
+			<xsd:element
+				ref="LoggingNote"
+				minOccurs="0"
+				maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- simple statistics of the calculation process -->
+<xsd:element name="LoggingStatistics">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				name="Status"
+				type="LOGGING-LEVEL-TYPE"/>
+			<xsd:element
+				name="StartTimestamp"
+				type="xsd:dateTime"
+				minOccurs="0"
+				maxOccurs="1"/>
+			<xsd:element
+				name="EndTimestamp"
+				type="xsd:dateTime"
+				minOccurs="0"
+				maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- one logging note  -->
+<xsd:element name="LoggingNote">
+	<xsd:complexType>
+		<xsd:sequence>
+			<xsd:element
+				name="LoggingTime"
+				type="xsd:dateTime"/>
+			<xsd:element
+				name="Status"
+				type="LOGGING-LEVEL-TYPE"/>
+			<xsd:element
+				name="Description"
+				type="xsd:string"/>
+		</xsd:sequence>
+		<xsd:attribute
+			name="EntityID"
+			type="ENTITY-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="IndiceID"
+			type="INDICE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="TimeStamp"
+			type="TIMESTAMP-TYPE"
+			use="optional"/>
+		<xsd:attribute
+			name="VariableID"
+			type="VARIABLE-ID"
+			use="optional"/>
+		<xsd:attribute
+			name="OperatorAlgorithm"
+			type="ALGORITHM-NAME"
+			use="optional"/>
+	</xsd:complexType>
+</xsd:element>
+
+<!-- defines the level of details of the logging process -->
+<xsd:simpleType name="LOGGING-LEVEL-TYPE">
+	<xsd:restriction base="xsd:string">
+		<xsd:enumeration value="debug"/>
+		<xsd:enumeration value="info"/>
+		<xsd:enumeration value="warn"/>
+		<xsd:enumeration value="error"/>
+		<xsd:enumeration value="fatal"/>
+	</xsd:restriction>
+</xsd:simpleType>
+
+<!-- algorithms' names gathered together -->
+<xsd:simpleType name="ALGORITHM-NAME">
+	<xsd:union memberTypes="
+		DATA-STATISTICS-ALGORITHM
+		OUTLIERS-DETECTION-ALGORITHM
+		DATA-IMPUTATION-ALGORITHM
+		MULTIVARIATE-ANALYSIS-ALGORITHM
+		DATA-NORMALIZATION-ALGORITHM
+		WEIGHTING-AGGREGATION-ALGORITHM
+		UNCERTAINTY-SENSITIVITY-ALGORITHM"/>
+</xsd:simpleType>
+
+</xsd:schema>
+
